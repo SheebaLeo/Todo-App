@@ -1,27 +1,29 @@
 package se.lexicon.model;
 
+import java.util.Objects;
+
 public class Person {
 
     private int id;
 
-    private String fristName;
+    private String firstName;
 
     private String lastName;
 
     private String email;
 
-    public Person(int id, String fristName, String lastName, String email) {
-        if (fristName == null || fristName.isEmpty()) {
+    public Person(int id, String firstName, String lastName, String email) {
+        if (firstName == null || firstName.isEmpty()) {
             throw new IllegalArgumentException("fristName cannot be null or empty");
         }
         if (lastName == null || lastName.isEmpty()) {
-            throw new IllegalArgumentException("fristName cannot be null or empty");
+            throw new IllegalArgumentException("lastName cannot be null or empty");
         }
         if (email == null || email.isEmpty()) {
-            throw new IllegalArgumentException("fristName cannot be null or empty");
+            throw new IllegalArgumentException("email cannot be null or empty");
         }
         this.id = id;
-        this.fristName = fristName;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
@@ -30,15 +32,15 @@ public class Person {
         return id;
     }
 
-    public String getFristName() {
-        return fristName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFristName(String fristName) {
-        if (fristName == null || fristName.isEmpty()) {
+    public void setFirstName(String firstName) {
+        if (firstName == null || firstName.isEmpty()) {
             throw new IllegalArgumentException("fristName cannot be null or empty");
         }
-        this.fristName = fristName;
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -63,7 +65,28 @@ public class Person {
         this.email = email;
     }
 
-    public String getSummary() {
+    /*public String getSummary() {
         return "Id: " + id + ", " + "Name" + fristName + " " + lastName + ", " + "Email: " + email;
+    }*/
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName=" + lastName +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Person person = (Person) obj;
+        return firstName.equals(person.firstName) && lastName == person.lastName;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName);
     }
 }
